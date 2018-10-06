@@ -686,6 +686,10 @@ p {
   background-color: #FAFAFA;
   border-radius: 20px;
   margin-bottom: 16px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .event-card:hover {
