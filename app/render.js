@@ -10,6 +10,7 @@ export default function render(data) {
     const isCritical = item.type === 'critical';
     if (isCritical) {
       instance.classList.add('event-card_type_critical');
+      instance.querySelector('.event-card__close').style.backgroundImage = `url(img/cross-white.svg)`;
     }
     instance.querySelector('.event-card__title').textContent = item.title;
     instance.querySelector('.event-card__source').textContent = item.source;
