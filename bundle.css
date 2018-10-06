@@ -688,6 +688,11 @@ p {
   margin-bottom: 16px;
 }
 
+.event-card:hover {
+    background-color: #F3F3F3;
+    box-shadow: 0 2px 6px 0 rgba(197,186,186,0.50);
+  }
+
 .event-card:hover .event-card__options {
     display: block;
   }
@@ -857,6 +862,14 @@ p {
 
 .event-card_type_critical .event-card__rest {
     background-color: #FAFAFA;
+  }
+
+.event-card.event-card_type_critical:hover {
+    background-color: #DB5341;
+  }
+
+.event-card.event-card_type_critical:hover .event-card__rest {
+    background-color: #F3F3F3;
   }
 
 @media (min-width: 480px) {
