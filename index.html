@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Яндекс Дом</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="bundle.css">
+    <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+  </head>
+  <body>
+    <div class="main-wrapper">
+      <!-- Start main-header -->
+      <header class="main-header">
+        <img src="img/main-logo.svg" class="main-header__logo" alt="Яндекс Дом">
+        <!-- Start main-menu -->
+        <div class="main-menu__burger clickable" touch-action="none">
+          <img src="img/icon-burger.svg" class="main-menu__burger-icon">
+        </div>
+        <div class="main-menu__container main-menu__container--hiding main-menu__container--hidden">
+          <nav class="main-menu main-menu--hidden">
+            <div class="main-menu__item main-menu__item--active"><a class="main-menu__link" href="#">События</a></div>
+            <div class="main-menu__item"><a class="main-menu__link" href="#">Сводка</a></div>
+            <div class="main-menu__item"><a class="main-menu__link" href="#">Устройства</a></div>
+            <div class="main-menu__item"><a class="main-menu__link" href="#">Сценарии</a></div>
+          </nav>
+        </div>
+        <!-- End main-menu -->
+      </header>
+      <!-- End main-header -->
+      <!-- Start main-section -->
+      <section class="main-section">
+        <h1 class="main-section__heading">Лента событий</h1>
+        <!-- Start main-layout -->
+        <div class="main-layout">
+          <!-- Start event-card-template -->
+          <template id="event-card-template">
+            <div class="event-card">
+              <div class="event-card__options">
+                <div class="event-card__close"></div>
+                <div class="event-card__more"></div>
+              </div>
+              <div class="event-card__top">
+                <div class="event-card__header">
+                  <img src="img/stats.svg" class="event-card__icon">
+                  <div class="event-card__heading line-clamp">
+                    <h2 class="event-card__title line-clamp__text">Еженедельный отчет по расходам ресурсов Еженедельный отчет по расходам ресурсов Еженедельный отчет по расходам ресурсов</h2>                  
+                  </div>
+                </div>
+                <div class="event-card__source">Сенсоры потребления</div>
+                <div class="event-card__time">19:00, Сегодня</div>
+              </div>
+              <div class="event-card__rest">
+                <p class="event-card__item event-card__description">Так держать! За последнюю неделю вы потратили на 10% меньше ресурсов, чем неделей ранее.</p>
+                <img src="img/Richdata.svg" class="event-card__item event-card__graph">
+                <div class="event-card__item event-card__climate">
+                  <div class="event-card__temperature">Температура: <span class="event-card__climate-value">24 С</span></div>
+                  <div class="event-card__humidity">Влажность: <span class="event-card__climate-value">80%</span></div>
+                </div>    
+                <div class="event-card__item event-card__music music">
+                    <div class="music__albumcover"></div>
+                    <div class="music__title">Florence & The Machine — Big God</div>
+                    <div class="music__progress"></div>
+                    <div class="music__length">4:31</div>
+                    <div class="music__prev-track"></div>
+                    <div class="music__next-track"></div>
+                    <div class="music__volume-slider"></div>
+                    <div class="music__volume-value">80%</div>
+                </div>
+                <div class="event-card__item event-card__buttons">
+                  <div class="event-card__button event-card__button_accept">Да</div>
+                  <div class="event-card__button">Нет</div>
+                </div>
+                <div class="event-card__item event-card__camera">
+                  <div class="event-card__view"></div>
+                  <div class="event-card__panel">
+                    <div class="event-card__zoom">Приближение: 78%</div>
+                    <div class="event-card__brightness">Яркость: 50%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+          <!-- End event-card-template -->
+        </div>
+        <!-- End main-layout -->
+      </section>
+      <!-- End main-section -->
+
+      <!-- Start main-footer -->
+      <footer class="main-footer">
+        <nav class="main-footer__menu footer-menu">
+          <div class="footer-menu__item"><a href="#" class="footer-menu__link clickable">Помощь</a></div>
+          <div class="footer-menu__item"><a href="#" class="footer-menu__link clickable">Обратная связь</a></div>
+          <div class="footer-menu__item"><a href="#" class="footer-menu__link clickable">Разработчикам</a></div>
+          <div class="footer-menu__item"><a href="#" class="footer-menu__link clickable">Условия использования</a></div>
+        </nav>
+        <div class="main-footer__copyright">© 2001–2017  ООО «Яндекс»</div>
+      </footer>
+      <!-- End main-footer -->
+    </div>
+
+    <script src="index.js" type="module"></script>
+  </body>
+</html>

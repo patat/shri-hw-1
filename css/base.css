@@ -1,0 +1,44 @@
+/* ==========================================================================
+   # Base styles, variables & resets
+   # using postcss-cssnext for variables
+   ========================================================================== */
+html {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333333;
+  
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+.clickable {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+}
+
+.main-wrapper {
+  position: relative;
+  min-height: 100vh;
+  padding-top: 3.9375rem;
+}
+
+@media (min-width: 1366px) {
+  html {
+    font-size: 1rem
+  }
+
+  .main-wrapper {
+    padding-top: 5.875rem;
+    padding-bottom: 50px;
+  }
+}

@@ -1,0 +1,283 @@
+/* ==========================================================================
+   # Module event-card
+   ========================================================================== */
+.event-card {
+  position: relative;
+  background-color: #FAFAFA;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+  .event-card:hover .event-card__options {
+    display: block;
+  }
+
+  .event-card__options {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    border-radius: 0 20px 20px 0;
+  }
+
+  .event-card__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 14px;
+    height: 14px;
+    background-image: url('../img/cross.svg');
+    background-size: cover;
+  }
+
+  .event-card__more {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 10px;
+    height: 16px;
+    background-image: url('../img/next.svg');
+    background-size: cover;
+  }
+
+  .event-card__close:hover,
+  .event-card__more:hover {
+    cursor: pointer;
+  }
+
+  .event-card__top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .event-card__header {
+    display: flex;
+    align-items: center;
+    height: 68px;
+    width: 100%;
+  }
+
+  .event-card__icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+  
+  .event-card__heading {
+    margin-left: 16px;
+    max-height: calc(17px * 2);
+    overflow: hidden;
+  }
+
+  .event-card__title {
+    font-size: 14px;
+    line-height: calc(17 / 14);
+  }
+
+  .event-card__source,
+  .event-card__time {
+    font-size: 12px;
+    line-height: calc(14 / 12);
+  }
+
+  .event-card__rest {
+    padding: 16px;
+    padding-top: 0;
+    border-radius: 20px;
+  }
+
+  .event-card__description {
+    font-size: 18px;
+    line-height: calc(22 / 18);
+    padding-top: 16px;
+  }
+
+  .event-card__graph {
+    display: block;
+    width: 100%;
+    border-radius: 20px;
+    margin-top: 16px;
+  }
+
+  .event-card__climate {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    line-height: calc(16 / 14);
+    color: #000;
+    margin-top: 25px;
+  }
+
+  .event-card__climate-value {
+    font-weight: bold;
+  }
+
+  .event-card__music {
+    margin-top: 16px;
+  }
+
+  .event-card__buttons {
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .event-card__button {
+    font-size: 20px;
+    line-height: calc(22 / 20);
+    padding: 11px 20px;
+    min-width: 132px;
+    text-align: center;
+    border-radius: 8px;
+    background-color: #E5E5E5;
+  }
+
+  .event-card__button_accept {
+    background-color: #FFD93E;
+  }
+
+  .event-card__camera {
+    margin-top: 20px;
+  }
+
+  .event-card__view {
+    width: 100%;
+    padding-bottom: 66.7%;
+    border-radius: 20px;
+    background-size: cover;
+    background-repeat: repeat;
+  }
+
+  .event-card__panel {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 12px;
+  }
+
+  .event-card__zoom,
+  .event-card__brightness {
+    font-size: 12px;
+    line-height: calc(14 / 12);
+  }
+
+.event-card_type_critical {
+  background-color: #DB5341;
+  border-radius: 20px 20px 30px 30px;
+}
+
+  .event-card_type_critical .event-card__top {
+    color: #ffffff;
+    padding-bottom: 16px;
+  }
+
+  .event-card_type_critical .event-card__rest {
+    background-color: #FAFAFA;
+  }
+
+@media (min-width: 480px) {
+  .event-card {
+    margin-bottom: 0;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-auto-flow: column;
+  }
+
+  .event-card__rest {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .event-card__item:last-child {
+    padding-top: 16px;
+    margin-top: auto;
+  }
+}
+
+@media (min-width: 1366px) {
+/*  .event-card {
+    margin-bottom: 0;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-auto-flow: column;
+  }*/
+
+    .event-card__top {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .event-card__icon {
+      width: 52px;
+      height: 52px;
+    }
+
+    .event-card__header {
+      height: 88px;
+    }
+
+    .event-card__title {
+      font-size: 24px;
+      line-height: calc(28 / 24);
+    }
+
+    .event-card__heading {
+      max-height: calc(28px * 2);
+    }
+
+    .event-card__source,
+    .event-card__time {
+      font-size: 18px;
+      line-height: calc(21 / 18);
+    }
+
+    .event-card__rest {
+      padding: 20px;
+      padding-top: 0;
+/*      display: flex;
+      flex-direction: column;*/
+    }
+
+    .event-card__item:last-child {
+      padding-top: 25px;
+    }
+
+    .event-card__description {
+      font-size: 20px;
+      line-height: calc(23 / 24);
+      padding-top: 25px;
+    }
+
+    .event-card__climate {
+      font-size: 18px;
+      line-height: calc(21 / 18);
+      margin-top: 20px;
+    }
+
+    .event-card__buttons {
+      justify-content: flex-start;
+    }
+
+    .event-card__button {
+      padding: 16px 20px;
+      margin-right: 18px;
+    }
+
+  .main-layout__item_size_s .event-card__header {
+    height: 91px;
+  }
+
+  .main-layout__item_size_s .event-card__source {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .main-layout__item_size_l .event-card__description {
+    font-size: 24px;
+    line-height: calc(28 / 24);
+  }
+}
