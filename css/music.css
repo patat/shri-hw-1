@@ -69,7 +69,7 @@
     width: 53px;
     height: 52px;
     border-radius: 100%;
-    background-image: url('../img/Prev.svg');
+    background-image: url('img/Prev.svg');
     background-size: cover;
   }
   

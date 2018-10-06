@@ -750,7 +750,7 @@ p {
     right: 20px;
     width: 14px;
     height: 14px;
-    background-image: url('../img/cross.svg');
+    background-image: url('img/cross.svg');
     background-size: cover;
   }
 
@@ -760,7 +760,7 @@ p {
     right: 20px;
     width: 10px;
     height: 16px;
-    background-image: url('../img/next.svg');
+    background-image: url('img/next.svg');
     background-size: cover;
   }
 
@@ -921,13 +921,6 @@ p {
 }
 
 @media (min-width: 1366px) {
-/*  .event-card {
-    margin-bottom: 0;
-    display: grid;
-    grid-template-rows: auto 1fr;
-    grid-auto-flow: column;
-  }*/
-
     .event-card__top {
       padding-left: 20px;
       padding-right: 20px;
@@ -960,8 +953,6 @@ p {
     .event-card__rest {
       padding: 20px;
       padding-top: 0;
-/*      display: flex;
-      flex-direction: column;*/
     }
 
     .event-card__item:last-child {
@@ -1077,7 +1068,7 @@ p {
     width: 53px;
     height: 52px;
     border-radius: 100%;
-    background-image: url('../img/Prev.svg');
+    background-image: url('img/Prev.svg');
     background-size: cover;
   }
 

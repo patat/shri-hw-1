@@ -59,7 +59,7 @@ export default function render(data) {
 
     const camera = instance.querySelector('.event-card__camera');
     if (item.data && item.data.image) {
-      camera.querySelector('.event-card__view').style.backgroundImage = `url(../img/${item.data.image})`;
+      camera.querySelector('.event-card__view').style.backgroundImage = `url(img/${item.data.image})`;
     } else {
       camera.remove();
     }
