@@ -835,11 +835,32 @@ p {
   }
 
 .event-card__view {
+    position: relative;
     width: 100%;
     padding-bottom: 66.7%;
     border-radius: 20px;
     background-size: cover;
     background-repeat: repeat;
+  }
+
+.event-card__scrollbar {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: -5px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, .4);
+  }
+
+.event-card__scroller {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 50%;
+    height: 8px;
+    border-radius: 8px;
+    background-color: #fff;
   }
 
 .event-card__panel {

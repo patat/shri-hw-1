@@ -1,7 +1,8 @@
 import mainMenu from './main-menu.js';
 import lineClamp from './line-clamp.js';
 import render from './render.js';
-import moveCamera from './move-camera.js';
+import initGestures from './initGestures.js';
+import Camera from './Camera.js';
 
 export default function app() {
   document.addEventListener('DOMContentLoaded', function() {
@@ -16,9 +17,15 @@ export default function app() {
       const cardHeadingsToClamp = document.querySelectorAll('.line-clamp');
       cardHeadingsToClamp.forEach(cardHeading => lineClamp(cardHeading));
 
-      const camera = document.querySelector('.event-card__camera');
-      moveCamera(camera);
-    }, 10);
+      const cameraEl = document.querySelector('.event-card__camera');
+      const camera = new Camera(cameraEl);
+      initGestures(
+        camera.view, 
+        (d) => camera.move(d), 
+        (d) => camera.zoom(d),
+        (d) => camera.brigtness(d)
+      );
+    }, 100);
     
   });
 };
