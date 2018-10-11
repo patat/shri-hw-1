@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="bundle.css">
     <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   </head>
   <body>
     <div class="main-wrapper">
@@ -23,7 +24,7 @@
             <div class="main-menu__item"><a class="main-menu__link" href="#">Сводка</a></div>
             <div class="main-menu__item"><a class="main-menu__link" href="#">Устройства</a></div>
             <div class="main-menu__item"><a class="main-menu__link" href="#">Сценарии</a></div>
-            <div class="main-menu__item"><a class="main-menu__link" href="camera.html">Камеры</a></div>
+            <div class="main-menu__item"><a class="main-menu__link" href="camera.html">Видеонаблюдение</a></div>
           </nav>
         </div>
         <!-- End main-menu -->
@@ -31,10 +32,28 @@
       <!-- End main-header -->
       <!-- Start main-section -->
       <section class="main-section">
-        <h1 class="main-section__heading">Камеры</h1>
         <!-- Start main-layout -->
-        <div class="main-layout">
-          
+        <div class="video-preview__layout">
+          <div class="video-preview__layout-box">
+            <div class="video-preview__container">
+              <video class="video-preview" id="video-1" class="video" muted autoplay></video>
+            </div>
+          </div>
+          <div class="video-preview__layout-box">
+            <div class="video-preview__container">
+            <video class="video-preview" id="video-2" class="video" muted autoplay></video>
+          </div>
+          </div>
+          <div class="video-preview__layout-box">
+            <div class="video-preview__container">
+              <video class="video-preview" id="video-3" class="video" muted autoplay></video>
+            </div>
+          </div>
+          <div class="video-preview__layout-box">
+            <div class="video-preview__container">
+              <video class="video-preview" id="video-4" class="video" muted autoplay></video>
+            </div>
+          </div>
         </div>
         <!-- End main-layout -->
       </section>
@@ -54,6 +73,58 @@
       <!-- End main-footer -->
     </div>
 
+    <div class="fullscreen-video__bg"></div>
+    <div class="fullscreen-video__controls">
+      <div class="fullscreen-video__top-bar">
+        <div class="fullscreen-video__back-btn">Все камеры</div>
+        <!-- Start slider -->
+        <div id="slider-brightness" class="slider fullscreen-video__slider" touch-action="none">
+          <div class="slider__before">
+              <div class="slider__from"></div>
+          </div>
+          <div class="slider__cursor"></div>
+          <div class="slider__after">
+              <div class="slider__to"></div>
+          </div>
+        </div>
+        <!-- End slider -->
+        <!-- Start slider -->
+        <div id="slider-contrast" class="slider fullscreen-video__slider" touch-action="none">
+          <div class="slider__before">
+              <div class="slider__from"></div>
+          </div>
+          <div class="slider__cursor"></div>
+          <div class="slider__after">
+              <div class="slider__to"></div>
+          </div>
+        </div>
+        <!-- End slider -->
+        <div class="fullscreen-video__volume">
+          <div class="fullscreen-video__volume-level"></div>
+        </div>
+      </div>
+    </div>
+
     <script src="camera.js" type="module"></script>
+    <script src="//rawgit.com/mrdoob/stats.js/master/build/stats.min.js"></script>
+    <script>
+      // var stats = new Stats();
+      // stats.showPanel( 2 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+      // document.body.appendChild( stats.dom );
+
+      // function animate() {
+
+      //   stats.begin();
+
+      //   // monitored code goes here
+
+      //   stats.end();
+
+      //   requestAnimationFrame( animate );
+
+      // }
+
+      // requestAnimationFrame( animate );
+    </script>
   </body>
 </html>

@@ -20,6 +20,11 @@
 @import './css/event-card.css';
 @import './css/music.css';
 
+/* Video
+   ========================================================================== */
+@import './css/video-preview.css';
+@import './css/fullscreen-video.css';
+@import './css/widget-slider.css';
 /* Footer
    ========================================================================== */
 @import './css/main-footer.css';
