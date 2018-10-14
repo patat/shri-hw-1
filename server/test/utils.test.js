@@ -49,7 +49,7 @@ describe('utils', function () {
       expect(validatePagination(1, 99999)).to.equal(true);
     });
 
-    it ('returns false if one or both of params isn\'t a positive int', function test () {
+    it('returns false if one or both of params isn\'t a positive int', function test () {
       expect(validatePagination(0, 99999)).to.equal(false);
       expect(validatePagination(1, -99999)).to.equal(false);
       expect(validatePagination(1, '')).to.equal(false);
