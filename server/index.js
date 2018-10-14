@@ -2,31 +2,31 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
+const jsonParser = bodyParser.json();
 
 const utils = require('./utils.js');
 const config = require('./config.json');
 const eventsDB = require('./events.json');
 const port = config.port || 8000;
-let startTimeMs;
 
 app.get('/status', (req, res) => {
   res.status(200);
   res.setHeader('Content-Type', 'text/html');
   res.setHeader('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 
-  const serverUptimeMs = Date.now() - startTimeMs;
+  const serverUptimeMs = Date.now() - req.app.get('startTime');
   const serverUptime = utils.formatTime(serverUptimeMs);
 
   res.send(serverUptime);
 });
 
-app.post('/api/events', urlencodedParser, (req, res) => {
+app.post('/api/events', jsonParser, (req, res) => {
   let result = {};
   // Filter by type
   if (req.body.type) {
-    const types = req.body.type.split(':');
+    const types = req.body.type;
 
-    if (!utils.validateTypes(types, config.types)) {
+    if (!utils.validateTypes(req.body.type, config.types)) {
       res.statusMessage = 'incorrect type';
       res.status(400).end();
       return;
@@ -64,6 +64,7 @@ app.all('*', (req, res) => {
 });
 
 app.listen(port, () => {
-  startTimeMs = Date.now();
+  const startTimeMs = Date.now();
+  app.set('startTime', startTimeMs);
   console.log(`App listening on port ${port}!`);
 });
