@@ -14,6 +14,8 @@ function addLeadingZero (num) {
 // Takes array of types and checks if each of them is allowed in config.json
 // returns true if each type is allowed, false otherwise
 function validateTypes (types, allowedTypes) {
+  if (!Array.isArray(types)) return false;
+  if (!types.length > 0) return false;
   for (const type of types) {
     if (!allowedTypes.includes(type)) {
       return false;

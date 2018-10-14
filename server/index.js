@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const jsonParser = bodyParser.json();
 
 const utils = require('./utils.js');
@@ -23,10 +22,10 @@ app.get('/status', (req, res) => {
 app.post('/api/events', jsonParser, (req, res) => {
   let result = {};
   // Filter by type
-  if (req.body.type) {
+  if (req.body.type !== global.udefined) {
     const types = req.body.type;
 
-    if (!utils.validateTypes(req.body.type, config.types)) {
+    if (!utils.validateTypes(types, config.types)) {
       res.statusMessage = 'incorrect type';
       res.status(400).end();
       return;
@@ -40,7 +39,7 @@ app.post('/api/events', jsonParser, (req, res) => {
   }
 
   // Pagination
-  if (req.body.page && req.body.perPage) {
+  if (req.body.page !== global.udefined && req.body.perPage !== global.udefined) {
     if (!utils.validatePagination(req.body.page, req.body.perPage)) {
       res.statusMessage = 'incorrect pagination';
       res.status(400).end();

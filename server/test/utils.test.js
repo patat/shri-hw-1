@@ -27,8 +27,12 @@ describe('utils', function () {
       ];
     });
 
-    it('returns true if no types are given', function test () {
-      expect(validateTypes([], allowedTypes)).to.equal(true);
+    it('returns false if types are not in array', function test () {
+      expect(validateTypes('info', allowedTypes)).to.equal(false);
+    });
+
+    it('returns false if no types are given', function test () {
+      expect(validateTypes([], allowedTypes)).to.equal(false);
     });
 
     it('returns true if given types are allowed', function test () {
