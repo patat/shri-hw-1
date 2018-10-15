@@ -76,26 +76,23 @@
     <div class="fullscreen-video__bg"></div>
     <div class="fullscreen-video__controls">
       <div class="fullscreen-video__top-bar">
-        <div class="fullscreen-video__back-btn">Все камеры</div>
-        <!-- Start slider -->
-        <div id="slider-brightness" class="slider fullscreen-video__slider" touch-action="none">
-          <div class="slider__before">
-              <div class="slider__from"></div>
-          </div>
-          <div class="slider__cursor"></div>
-          <div class="slider__after">
-              <div class="slider__to"></div>
-          </div>
+        <div class="fullscreen-video__btn-container">
+          <div class="fullscreen-video__back-btn">Все камеры</div>
         </div>
+        <!-- Start slider -->
+        <div class="slider__container fullscreen-video__slider">
+          <div class="slider__title">Яркость</div>
+          <div id="slider-brightness" class="slider" touch-action="none">
+            <div class="slider__cursor"></div>
+          </div>          
+        </div>
+
         <!-- End slider -->
         <!-- Start slider -->
-        <div id="slider-contrast" class="slider fullscreen-video__slider" touch-action="none">
-          <div class="slider__before">
-              <div class="slider__from"></div>
-          </div>
-          <div class="slider__cursor"></div>
-          <div class="slider__after">
-              <div class="slider__to"></div>
+        <div class="slider__container fullscreen-video__slider">
+          <div class="slider__title">Контраст</div>
+          <div id="slider-contrast" class="slider" touch-action="none">
+            <div class="slider__cursor"></div>
           </div>
         </div>
         <!-- End slider -->
