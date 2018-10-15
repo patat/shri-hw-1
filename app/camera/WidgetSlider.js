@@ -1,8 +1,9 @@
+/* global requestAnimationFrame */
 export default class WidgetSlider {
-  constructor(el, callback, initialValue = 0.5) {
+  constructor (el, callback, initialValue = 0.5) {
     this.sliderCursor = el.querySelector('.slider__cursor');
     this.isVertical = false;
-    
+
     this.sliderRect = el.getBoundingClientRect();
     this.callback = callback;
     this.minDisplacement = 0;
@@ -19,24 +20,24 @@ export default class WidgetSlider {
     callback(this.getValue());
   }
 
-  getValue() {
+  getValue () {
     return this.cursorDisplacement / this.maxDisplacement;
   }
 
-  sliderStart(ev) {
+  sliderStart (ev) {
     if (!this.tracking) {
       this.sliderCursor.setPointerCapture(ev.pointerId);
       const cursorDisplacement = Number.parseInt(this.sliderCursor.style.left, 10);
       if (!Number.isNaN(cursorDisplacement)) {
         this.cursorDisplacement = cursorDisplacement;
       }
-      
+
       this.prevCoord = this.isVertical ? ev.clientY : ev.clientX;
       this.tracking = true;
     }
   }
 
-  sliderMove(ev) {
+  sliderMove (ev) {
     if (this.tracking) {
       const currCoord = (this.isVertical ? ev.clientY : ev.clientX);
       let delta = currCoord - this.prevCoord;
@@ -46,7 +47,7 @@ export default class WidgetSlider {
 
       if (nextDisplacement < this.minDisplacement) {
         nextDisplacement = this.minDisplacement;
-      } else if ( nextDisplacement > this.maxDisplacement) {
+      } else if (nextDisplacement > this.maxDisplacement) {
         nextDisplacement = this.maxDisplacement;
       }
 
@@ -64,7 +65,7 @@ export default class WidgetSlider {
     }
   }
 
-  sliderEnd() {
+  sliderEnd () {
     if (this.tracking) {
       this.tracking = false;
     }
