@@ -46,8 +46,10 @@ app.post('/api/events', jsonParser, (req, res) => {
       return;
     }
 
-    const pageStart = (req.body.page - 1) * req.body.perPage;
-    const pageEnd = req.body.page * req.body.perPage;
+    const page = parseInt(req.body.page, 10);
+    const perPage = parseInt(req.body.perPage, 10);
+    const pageStart = (page - 1) * perPage;
+    const pageEnd = page * perPage;
     events = events.slice(pageStart, pageEnd);
   }
 
