@@ -1,14 +1,9 @@
 // Takes time in ms and returns it converted to "hh:mm:ss"
 function formatTime (ms) {
-  const seconds = parseInt((ms / 1000) % 60);
-  const minutes = parseInt((ms / (1000 * 60)) % 60);
-  const hours = parseInt(ms / (1000 * 60 * 60));
-  return `${addLeadingZero(hours)}:${addLeadingZero(minutes)}:${addLeadingZero(seconds)}`;
-}
-
-// Adds '0' if a number is less than 10
-function addLeadingZero (num) {
-  return (num < 10 ? '0' : '') + num;
+  const seconds = parseInt((ms / 1000) % 60).toString().padStart(2, '0');
+  const minutes = parseInt((ms / (1000 * 60)) % 60).toString().padStart(2, '0');
+  const hours = parseInt(ms / (1000 * 60 * 60)).toString().padStart(2, '0');
+  return `${hours}:${minutes}:${seconds}`;
 }
 
 // Takes array of types and checks if each of them is allowed in config.json
