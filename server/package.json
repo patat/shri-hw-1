@@ -1,0 +1,23 @@
+{
+  "name": "node-js",
+  "version": "1.0.0",
+  "description": "Solution to hw-4 Node JS",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "semistandard && mocha \"test/**/*.test.js\"",
+    "dev": "npm run test -- --watch"
+  },
+  "author": "Anton Pudikov",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.4",
+    "semistandard": "^12.0.1"
+  }
+}
