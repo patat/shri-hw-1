@@ -2,6 +2,10 @@
    # Main Footer & Footer menu
    ========================================================================== */
 .main-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   font-size: 0.75rem;
   color: #858585;
   letter-spacing: 0.01px;

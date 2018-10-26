@@ -1,0 +1,55 @@
+/* ==========================================================================
+   # Widget Slider
+   ========================================================================== */
+.slider {
+  position: relative;
+  touch-action: none;
+  user-select: none;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+  height: 2rem;
+  border-radius: 1rem;
+  background-color: #fff;
+  width: 12rem;
+}
+
+  .slider__cursor {
+    position: absolute;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid #000;
+    border-radius: 100%;
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  .slider__cursor:before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2.4rem;
+    height: 2.4rem;
+    border: .2rem solid #FFFFFF;
+    border-radius: 100%;
+    z-index: 1;
+  }
+
+  .slider__container {
+    user-select: none;
+  }
+
+  .slider__title {
+    font-size: 14px;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    color: #fff;
+  }
+
+@media (max-width: 700px) {
+  .slider {
+    width: 9rem;
+  }
+}
