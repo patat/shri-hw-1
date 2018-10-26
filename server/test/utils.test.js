@@ -54,11 +54,17 @@ describe('utils', function () {
     });
 
     it('returns false if one or both of params isn\'t a positive int', function test () {
-      expect(validatePagination(0, 99999)).to.equal(false);
-      expect(validatePagination(1, -99999)).to.equal(false);
-      expect(validatePagination(1, '')).to.equal(false);
-      expect(validatePagination(1, [])).to.equal(false);
-      expect(validatePagination(-1, {})).to.equal(false);
+      expect(validatePagination(0, 10)).to.equal(false);
+      expect(validatePagination(-1, 10)).to.equal(false);
+      expect(validatePagination('', 10)).to.equal(false);
+      expect(validatePagination([], 10)).to.equal(false);
+      expect(validatePagination({}, 10)).to.equal(false);
+
+      expect(validatePagination(10, 0)).to.equal(false);
+      expect(validatePagination(10, -1)).to.equal(false);
+      expect(validatePagination(10, '')).to.equal(false);
+      expect(validatePagination(10, [])).to.equal(false);
+      expect(validatePagination(10, {})).to.equal(false);
     });
   });
 });
