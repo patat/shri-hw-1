@@ -20,7 +20,7 @@ app.get('/status', (req, res) => {
 });
 
 app.post('/api/events', jsonParser, (req, res) => {
-  let result = {};
+  let events = [];
   // Filter by type
   if (req.body.type !== global.udefined) {
     const types = req.body.type;
@@ -31,11 +31,11 @@ app.post('/api/events', jsonParser, (req, res) => {
       return;
     }
 
-    result.events = eventsDB.events.filter(event => {
+    events = eventsDB.events.filter(event => {
       return types.includes(event.type);
     });
   } else {
-    result = Object.assign({}, eventsDB);
+    events = eventsDB.events;
   }
 
   // Pagination
@@ -48,12 +48,12 @@ app.post('/api/events', jsonParser, (req, res) => {
 
     const pageStart = (req.body.page - 1) * req.body.perPage;
     const pageEnd = req.body.page * req.body.perPage;
-    result.events = result.events.slice(pageStart, pageEnd);
+    events = events.slice(pageStart, pageEnd);
   }
 
   res.status(200);
   res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify(result));
+  res.send(JSON.stringify({ events }));
 });
 
 app.all('*', (req, res) => {
