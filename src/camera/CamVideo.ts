@@ -1,11 +1,42 @@
 /* global Hls requestAnimationFrame */
+import WidgetSlider from './WidgetSlider';
+// import '@types/hls.js';
+
+export interface CamVideoConfig {
+  id: string;
+  url: string;
+  bg: HTMLElement;
+  controlPanel: HTMLElement;
+  volumeWidget: HTMLElement;
+  backBtn: HTMLElement;
+  brightnessWidget: WidgetSlider;
+  contrastWidget: WidgetSlider;
+}
 
 export default class CamVideo {
-  constructor (config) {
+  id: string
+  url: string
+  el: HTMLVideoElement
+  container: HTMLElement
+  bg: HTMLElement
+  controlPanel: HTMLElement
+  volumeWidget: HTMLElement
+  backBtn: HTMLElement
+  brightness: number
+  brightnessWidget: WidgetSlider
+  contrast: number
+  contrastWidget: WidgetSlider
+  isFullscreen: boolean
+  scale: number;
+  translateX: number;
+  translateY: number;
+  frequencyData: Uint8Array;
+
+  constructor (config: CamVideoConfig) {
     this.id = config.id;
     this.url = config.url;
-    this.el = document.getElementById(this.id);
-    this.container = this.el.parentNode;
+    this.el = document.querySelector(`#${this.id}`);
+    this.container = this.el.parentElement;
     this.bg = config.bg;
     this.controlPanel = config.controlPanel;
     this.volumeWidget = config.volumeWidget;
@@ -35,10 +66,13 @@ export default class CamVideo {
   }
 
   _initStream () {
+    // @ts-ignore
     if (Hls.isSupported()) {
+      // @ts-ignore
       const hls = new Hls();
       hls.loadSource(this.url);
       hls.attachMedia(this.el);
+      // @ts-ignore
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
         this.el.play();
       });
@@ -67,13 +101,13 @@ export default class CamVideo {
 
   _initSliders () {
     this.brightnessWidget.setValue(this.brightness / 2);
-    this.brightnessWidget.bindCallback(value => {
+    this.brightnessWidget.bindCallback((value: number) => {
       this.brightness = value * 2;
       this.el.style.filter = `brightness(${this.brightness}) contrast(${this.contrast})`;
     });
 
     this.contrastWidget.setValue(this.contrast / 2);
-    this.contrastWidget.bindCallback(value => {
+    this.contrastWidget.bindCallback((value: number) => {
       this.contrast = value * 2;
       this.el.style.filter = `brightness(${this.brightness}) contrast(${this.contrast})`;
     });
@@ -99,12 +133,15 @@ export default class CamVideo {
     document.body.style.overflow = 'hidden';
     document.body.style.width = '100%';
 
-    this.container.style = `transform: translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale}); z-index: 2005;`;
-    this.bg.style = `z-index: 2000; opacity: 1`;
+    this.container.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
+    this.container.style.zIndex = '2005';
+    this.bg.style.zIndex = '2000';
+    this.bg.style.opacity = '1';
 
     // give it time to expand, than show control panel
     setTimeout(() => {
-      this.controlPanel.style = `z-index: 2010; opacity: 1`;
+      this.controlPanel.style.zIndex = '2010';
+      this.controlPanel.style.opacity = '1';
     }, 500);
   }
 
@@ -124,9 +161,12 @@ export default class CamVideo {
     document.body.style.overflow = '';
     document.body.style.width = '';
 
-    this.container.style = `transform: scale(1)`;
-    this.bg.style = `z-index: -1; opacity: 0`;
-    this.controlPanel.style = `z-index: -1; opacity: 0`;
+    this.container.style.transform = 'scale(1)';
+    this.container.style.zIndex = '';
+    this.bg.style.zIndex = '-1';
+    this.bg.style.opacity = '0';
+    this.controlPanel.style.zIndex = '-1';
+    this.controlPanel.style.opacity = '0';
   }
 
   setAudioAnalizer (analizer) {
