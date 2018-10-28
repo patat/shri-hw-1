@@ -4,19 +4,10 @@ import render from './render.js';
 import initGestures from './initGestures.js';
 import Camera from './Camera.js';
 
-interface EventsData {
-  events: Array<HouseEvent>
-}
+import { HouseEvent } from './render.js';
 
-interface HouseEvent {
-  type: string;
-  title: string;
-  source: string;
-  time: string;
-  icon: string;
-  size: string;
-  description?: string;
-  data?: any
+export interface EventsData {
+  events: Array<HouseEvent>
 }
 
 export default function app() {

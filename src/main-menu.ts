@@ -45,6 +45,7 @@ export default function mainMenu() {
    menuItems.forEach((menuItem, index) => {
     menuItem.addEventListener('click', function(ev) {
       menuItems[currActiveMenuItem].classList.remove('main-menu__item--active');
+      // @ts-ignore
       this.classList.add('main-menu__item--active');
       currActiveMenuItem = index;
     });

@@ -1,6 +1,5 @@
 /* global Hls requestAnimationFrame */
 import WidgetSlider from './WidgetSlider';
-// import '@types/hls.js';
 
 export interface CamVideoConfig {
   id: string;
@@ -31,6 +30,7 @@ export default class CamVideo {
   translateX: number;
   translateY: number;
   frequencyData: Uint8Array;
+  audioAnalizer: any
 
   constructor (config: CamVideoConfig) {
     this.id = config.id;
@@ -169,7 +169,7 @@ export default class CamVideo {
     this.controlPanel.style.opacity = '0';
   }
 
-  setAudioAnalizer (analizer) {
+  setAudioAnalizer (analizer: any) {
     this.audioAnalizer = analizer;
     const bufferLength = this.audioAnalizer.frequencyBinCount;
     this.frequencyData = new Uint8Array(bufferLength);

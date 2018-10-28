@@ -1,4 +1,21 @@
-export default function initGestures(element, onDrag, onPinch, onRotate) {
+interface GestureState {
+  events: Array<PointerEvent>;
+  dragPosition: number | null;
+  pinchDiff: number | null;
+  rotateAngle: number | null;
+  trackingPinch: boolean;
+  trackingRotate: boolean;
+  eventCnt: number;
+  cumulativeDeltaAngle: number;
+  cumulativeDeltaPinch: number;
+}
+
+interface Point {
+  x: number;
+  y: number;
+}
+
+export default function initGestures(element: HTMLElement, onDrag: Function, onPinch: Function, onRotate: Function) {
   // set to support pointer events with PEP
   element.setAttribute('touch-action', 'none');
 
@@ -12,7 +29,7 @@ export default function initGestures(element, onDrag, onPinch, onRotate) {
   // element.appendChild(log);
   // log.textContent = 'hohoho';
 
-  const state = {
+  const state: GestureState = {
     events: [],
     dragPosition: null,
     pinchDiff: null,
@@ -24,7 +41,7 @@ export default function initGestures(element, onDrag, onPinch, onRotate) {
     cumulativeDeltaPinch: 0
   };
 
-  function onPointerDown(ev) {
+  function onPointerDown(ev: PointerEvent) {
     state.events.push(ev);
     element.setPointerCapture(ev.pointerId);
 
@@ -33,7 +50,7 @@ export default function initGestures(element, onDrag, onPinch, onRotate) {
     }
   }
 
-  function onPointerMove(ev) {
+  function onPointerMove(ev: PointerEvent) {
     updateEvent(ev);
 
     if (state.events.length === 1) {
@@ -118,7 +135,7 @@ export default function initGestures(element, onDrag, onPinch, onRotate) {
     }
   }
 
-  function onPointerUp(ev) {
+  function onPointerUp(ev: PointerEvent) {
     removeEvent(ev);
 
     if (state.events.length < 1) {
@@ -136,7 +153,7 @@ export default function initGestures(element, onDrag, onPinch, onRotate) {
     }
   }
 
-  function updateEvent(ev) {
+  function updateEvent(ev: PointerEvent) {
     for (var i = 0; i < state.events.length; i++) {
        if (state.events[i].pointerId == ev.pointerId) {
          state.events[i] = ev;
@@ -145,7 +162,7 @@ export default function initGestures(element, onDrag, onPinch, onRotate) {
      }
   }
 
-  function removeEvent(ev) {
+  function removeEvent(ev: PointerEvent) {
     for (var i = 0; i < state.events.length; i++) {
        if (state.events[i].pointerId == ev.pointerId) {
          state.events.splice(i, 1);
@@ -154,7 +171,7 @@ export default function initGestures(element, onDrag, onPinch, onRotate) {
      }
   }
 
-  function calcAngle(point1, point2) {
+  function calcAngle(point1: Point, point2: Point) : number {
     const vec1 = {
       x: point2.x - point1.x,
       y: 0

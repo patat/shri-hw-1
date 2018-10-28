@@ -1,6 +1,16 @@
 /* global requestAnimationFrame */
 export default class WidgetSlider {
-  constructor (el, initialValue = 0.5) {
+  sliderCursor: HTMLElement;
+  isVertical: boolean;
+  sliderRect: ClientRect;
+  minDisplacement: number;
+  maxDisplacement: number;
+  cursorDisplacement: number;
+  tracking: boolean;
+  callback: Function;
+  prevCoord: number;
+
+  constructor (el: HTMLElement, initialValue: number = 0.5) {
     this.sliderCursor = el.querySelector('.slider__cursor');
     this.isVertical = false;
 
@@ -16,15 +26,15 @@ export default class WidgetSlider {
 
     this.sliderCursor.addEventListener('pointerdown', ev => this.sliderStart(ev), true);
     this.sliderCursor.addEventListener('pointermove', ev => this.sliderMove(ev), true);
-    this.sliderCursor.addEventListener('pointerup', ev => this.sliderEnd(ev), true);
-    this.sliderCursor.addEventListener('pointercancel', ev => this.sliderEnd(ev), true);
+    this.sliderCursor.addEventListener('pointerup', () => this.sliderEnd(), true);
+    this.sliderCursor.addEventListener('pointercancel', () => this.sliderEnd(), true);
   }
 
   getValue () {
     return this.cursorDisplacement / this.maxDisplacement;
   }
 
-  setValue (value) {
+  setValue (value: number) {
     let newValue = value;
     if (newValue < 0) {
       newValue = 0;
@@ -37,11 +47,11 @@ export default class WidgetSlider {
     this.sliderCursor.style.left = this.cursorDisplacement + 'px';
   }
 
-  bindCallback (callback) {
+  bindCallback (callback: Function) {
     this.callback = callback;
   }
 
-  sliderStart (ev) {
+  sliderStart (ev: PointerEvent) {
     if (!this.tracking) {
       this.sliderCursor.setPointerCapture(ev.pointerId);
 
@@ -50,7 +60,7 @@ export default class WidgetSlider {
     }
   }
 
-  sliderMove (ev) {
+  sliderMove (ev: PointerEvent) {
     if (this.tracking) {
       const currCoord = (this.isVertical ? ev.clientY : ev.clientX);
       let delta = currCoord - this.prevCoord;

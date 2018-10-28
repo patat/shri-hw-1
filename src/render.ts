@@ -1,16 +1,28 @@
-export default function render(data) {
-  const templ = document.getElementById('event-card-template').content
-    .querySelector('.event-card');
+export interface HouseEvent {
+  type: string;
+  title: string;
+  source: string;
+  time: string;
+  icon: string;
+  size: string;
+  description?: string;
+  data?: any
+}
+
+export default function render(data: Array<HouseEvent>) {
+  const templEl: HTMLTemplateElement = document.querySelector('#event-card-template');
+  const templ = templEl.content.querySelector('.event-card');
   const container = document.querySelector('.main-layout');
 
   data.forEach(item => {
-    const instance = templ.cloneNode(true);
+    const instance = templ.cloneNode(true) as HTMLElement;
 
     instance.classList.add(`main-layout__item_size_${item.size}`);
     const isCritical = item.type === 'critical';
     if (isCritical) {
       instance.classList.add('event-card_type_critical');
-      instance.querySelector('.event-card__close').style.backgroundImage = `url(img/cross-white.svg)`;
+      const closeBtn: HTMLElement = instance.querySelector('.event-card__close');
+      closeBtn.style.backgroundImage = `url(img/cross-white.svg)`;
     }
     instance.querySelector('.event-card__title').textContent = item.title;
     instance.querySelector('.event-card__source').textContent = item.source;
@@ -41,7 +53,8 @@ export default function render(data) {
 
     const music = instance.querySelector('.event-card__music');
     if (item.data && item.data.albumcover) {
-      music.querySelector('.music__albumcover').style.backgroundImage = `url(${item.data.albumcover})`;
+      const albumCover: HTMLElement = music.querySelector('.music__albumcover');
+      albumCover.style.backgroundImage = `url(${item.data.albumcover})`;
       music.querySelector('.music__title').textContent = `${item.data.artist} — ${item.data.track.name}`;
       music.querySelector('.music__length').textContent = item.data.track.length;
       music.querySelector('.music__volume-value').textContent = `${item.data.volume}%`;
@@ -60,7 +73,8 @@ export default function render(data) {
 
     const camera = instance.querySelector('.event-card__camera');
     if (item.data && item.data.image) {
-      camera.querySelector('.event-card__view').style.backgroundImage = `url(img/${item.data.image})`;
+      const view: HTMLElement = camera.querySelector('.event-card__view');
+      view.style.backgroundImage = `url(img/${item.data.image})`;
     } else {
       camera.remove();
     }

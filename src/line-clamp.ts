@@ -1,5 +1,5 @@
-export default function lineClamp(element) {
-  const text = element.querySelector('.line-clamp__text');
+export default function lineClamp(element: HTMLElement) {
+  const text: HTMLElement = element.querySelector('.line-clamp__text');
   const desiredHeight = element.clientHeight;
 
   while (text.offsetHeight > desiredHeight) { 
