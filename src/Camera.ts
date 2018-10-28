@@ -70,7 +70,7 @@ export default class Camera {
     this.brightnessInfo.textContent = `Яркость: ${Math.floor(this.brightness * 100)}%`;
   }
   
-  move(delta) {
+  move(delta: number) {
     //this.log.textContent = delta;
     let camPosition = this.camPosition - delta * 100 / this.view.clientWidth;
     if (camPosition <= 0) {
@@ -88,7 +88,7 @@ export default class Camera {
     });
   }
 
-  zoom(delta) {
+  zoom(delta: number) {
     //this.log.textContent = delta;
     let zoomValue = this.zoomValue + delta * 0.05;
     if (zoomValue <= 2) {
@@ -108,7 +108,7 @@ export default class Camera {
     });
   }
 
-  brigtness(delta) {
+  brigtness(delta: number) {
     //this.log.textContent = delta;
     let brightnessValue = this.brightness + delta * 0.05;
     if (brightnessValue <= 0.5) {
