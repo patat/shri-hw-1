@@ -1,14 +1,26 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const jsonParser = bodyParser.json();
+import express from "express";
+import bodyParser from "body-parser";
 
-const utils = require('./utils.js');
-const config = require('./config.json');
-const eventsDB = require('./events.json');
+import * as utils from './utils';
+const config = require('../config.json');
+const eventsDB = require('../events.json');
 const port = config.port || 8000;
 
-app.get('/status', (req, res) => {
+const app = express();
+const jsonParser = bodyParser.json();
+
+interface HouseEvent {
+  type: string;
+  title: string;
+  source: string;
+  time: string;
+  icon: string;
+  size: string;
+  description?: string;
+  data?: any
+}
+
+app.get('/status', (req: express.Request, res: express.Response) => {
   res.status(200);
   res.setHeader('Content-Type', 'text/html');
   res.setHeader('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
@@ -19,10 +31,10 @@ app.get('/status', (req, res) => {
   res.send(serverUptime);
 });
 
-app.post('/api/events', jsonParser, (req, res) => {
-  let events = [];
+app.post('/api/events', jsonParser, (req: express.Request, res: express.Response) => {
+  let events: Array<HouseEvent> = [];
   // Filter by type
-  if (req.body.type !== global.udefined) {
+  if (req.body.type !== undefined) {
     const types = req.body.type;
 
     if (!utils.validateTypes(types, config.types)) {
@@ -31,7 +43,7 @@ app.post('/api/events', jsonParser, (req, res) => {
       return;
     }
 
-    events = eventsDB.events.filter(event => {
+    events = eventsDB.events.filter((event: HouseEvent) => {
       return types.includes(event.type);
     });
   } else {
@@ -39,7 +51,7 @@ app.post('/api/events', jsonParser, (req, res) => {
   }
 
   // Pagination
-  if (req.body.page !== global.udefined && req.body.perPage !== global.udefined) {
+  if (req.body.page !== undefined && req.body.perPage !== undefined) {
     if (!utils.validatePagination(req.body.page, req.body.perPage)) {
       res.statusMessage = 'incorrect pagination';
       res.status(400).end();
