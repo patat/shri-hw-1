@@ -1,10 +1,11 @@
 import mainMenu from '../main-menu.js';
 import WidgetSlider from './WidgetSlider.js';
 import CamVideo from './CamVideo.js';
+import store from './store.js';
+import { fetchPopup } from './actions.js';
+import { CamState } from './actions';
 
-interface CamAppState {
-  camVideos: Array<CamVideo>
-}
+import {State, Action, Reducer, Reducers} from './store';
 
 declare global {
   interface Window { 
@@ -13,9 +14,28 @@ declare global {
   }
 }
 
+interface PopupAction extends Action {
+  payload?: string
+}
+
 export default function () {
   document.addEventListener('DOMContentLoaded', function () {
     mainMenu();
+
+    store.create({
+      videoPopup: (state: State, action: PopupAction): State => {
+        switch (action.type) {
+          case 'FETCH_POPUP': 
+            return { opened: action.payload };
+          case 'OPEN_POPUP': 
+            return { opened: action.payload };
+          case 'CLOSE_POPUP':
+            return { opened: action.payload };
+          default:
+            return state;
+        }
+      }
+    });
 
     const videos = [
       {
@@ -36,10 +56,6 @@ export default function () {
       }
     ];
 
-    const state: CamAppState = {
-      camVideos: []
-    };
-
     const fullscreenVideoBG: HTMLElement = document.querySelector('.fullscreen-video__bg');
     const fullscreenVideoControls: HTMLElement = document.querySelector('.fullscreen-video__controls');
     const goBackBtn: HTMLElement = fullscreenVideoControls.querySelector('.fullscreen-video__back-btn');
@@ -49,20 +65,21 @@ export default function () {
     const sliderContrastEl: HTMLElement = document.getElementById('slider-contrast');
     const sliderContrast: WidgetSlider = new WidgetSlider(sliderContrastEl);
 
-    videos.forEach((video, index) => {
-      const camVideo = new CamVideo(Object.assign({}, video, {
-        bg: fullscreenVideoBG,
-        controlPanel: fullscreenVideoControls,
-        volumeWidget: volumeWidget,
-        backBtn: goBackBtn,
-        brightnessWidget: sliderBrightness,
-        contrastWidget: sliderContrast
-      }));
+    fetchPopup().then((state: State) => {
+      videos.forEach((video, index) => {
+        const camVideo = new CamVideo(Object.assign({}, video, {
+          bg: fullscreenVideoBG,
+          controlPanel: fullscreenVideoControls,
+          volumeWidget: volumeWidget,
+          backBtn: goBackBtn,
+          brightnessWidget: sliderBrightness,
+          contrastWidget: sliderContrast,
+          isOpened: (state.videoPopup as CamState).opened === video.id
+        }));
 
-      const audioAnalizer = createAudioAnalizer(camVideo.el);
-      camVideo.setAudioAnalizer(audioAnalizer);
-
-      state.camVideos.push(camVideo);
+        const audioAnalizer = createAudioAnalizer(camVideo.el);
+        camVideo.setAudioAnalizer(audioAnalizer);
+      });
     });
   });
 }

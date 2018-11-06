@@ -1,3 +1,4 @@
+import { openPopup, closePopup } from './actions.js';
 export default class CamVideo {
     constructor(config) {
         this.id = config.id;
@@ -20,10 +21,13 @@ export default class CamVideo {
         // video element is fully rendered
         this.el.addEventListener('loadeddata', () => {
             this._updateTransformAmounts();
+            if (config.isOpened) {
+                this.activateVideo();
+            }
         });
         // init open / close events
-        this.el.addEventListener('click', () => { this.activateVideo(); });
-        this.backBtn.addEventListener('click', () => { this.deactivateVideo(); });
+        this.el.addEventListener('click', () => openPopup(this));
+        this.backBtn.addEventListener('click', () => closePopup(this));
     }
     _initStream() {
         // @ts-ignore

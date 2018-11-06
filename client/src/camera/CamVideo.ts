@@ -1,5 +1,9 @@
 /* global Hls requestAnimationFrame */
 import WidgetSlider from './WidgetSlider';
+import store from './store.js';
+import { openPopup, closePopup } from './actions.js';
+
+import {State, Action, Reducer, Reducers} from './store';
 
 export interface CamVideoConfig {
   id: string;
@@ -10,6 +14,7 @@ export interface CamVideoConfig {
   backBtn: HTMLElement;
   brightnessWidget: WidgetSlider;
   contrastWidget: WidgetSlider;
+  isOpened: boolean;
 }
 
 export default class CamVideo {
@@ -52,17 +57,22 @@ export default class CamVideo {
 
     // video is in grid mode by default
     this.isFullscreen = false;
+
     // video is muted by default
     this.el.muted = true;
 
     // video element is fully rendered
     this.el.addEventListener('loadeddata', () => {
       this._updateTransformAmounts();
+      
+      if (config.isOpened) {
+        this.activateVideo();
+      }
     });
 
     // init open / close events
-    this.el.addEventListener('click', () => { this.activateVideo(); });
-    this.backBtn.addEventListener('click', () => { this.deactivateVideo(); });
+    this.el.addEventListener('click', () => openPopup(this));
+    this.backBtn.addEventListener('click', () => closePopup(this));
   }
 
   _initStream () {
