@@ -1,5 +1,8 @@
 {
     "extends": "tslint:recommended",
+    "rulesDirectory": [
+        "node_modules/tslint-eslint-rules/dist/rules"
+    ],
     "rules": {
         "object-literal-sort-keys": false,
         "max-line-length": {
@@ -20,7 +23,8 @@
                 "timeEnd",
                 "trace"
             ]
-        }
+        },
+        "object-curly-spacing": [true, "always"]
     },
     "jsRules": {
         "max-line-length": {

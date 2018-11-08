@@ -5,7 +5,7 @@ import CamVideo from "./CamVideo.js";
 import store from "./store.js";
 import WidgetSlider from "./WidgetSlider.js";
 
-import {IAction, IState, Reducer, Reducers} from "./store";
+import { IAction, IState, Reducer } from "./store";
 
 declare global {
   // tslint:disable-next-line:interface-name

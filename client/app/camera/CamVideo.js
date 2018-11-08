@@ -86,10 +86,10 @@ export default class CamVideo {
     }
     activateVideo() {
         // can't expand fullscreen video
-        console.log("activate");
         if (this.isFullscreen) {
             return;
         }
+        this._updateTransformAmounts();
         this._expandToFullscreen();
         // unmute video
         // this.el.muted = false;
@@ -102,15 +102,12 @@ export default class CamVideo {
         document.body.style.position = "fixed";
         document.body.style.overflow = "hidden";
         document.body.style.width = "100%";
-        console.log(this.container);
         this.container.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
-        console.log(this.container);
         this.container.style.zIndex = "2005";
         this.bg.style.zIndex = "2000";
         this.bg.style.opacity = "1";
         // give it time to expand, than show control panel
         setTimeout(() => {
-            console.log("expand");
             this.controlPanel.style.zIndex = "2010";
             this.controlPanel.style.opacity = "1";
         }, 500);
