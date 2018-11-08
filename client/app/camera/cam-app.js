@@ -2,7 +2,6 @@ import mainMenu from '../main-menu.js';
 import WidgetSlider from './WidgetSlider.js';
 import CamVideo from './CamVideo.js';
 import store from './store.js';
-import { fetchPopup } from './actions.js';
 export default function () {
     document.addEventListener('DOMContentLoaded', function () {
         mainMenu();
@@ -46,21 +45,19 @@ export default function () {
         const sliderBrightness = new WidgetSlider(sliderBrightnessEl);
         const sliderContrastEl = document.getElementById('slider-contrast');
         const sliderContrast = new WidgetSlider(sliderContrastEl);
-        fetchPopup().then((state) => {
-            videos.forEach((video, index) => {
-                const camVideo = new CamVideo(Object.assign({}, video, {
-                    bg: fullscreenVideoBG,
-                    controlPanel: fullscreenVideoControls,
-                    volumeWidget: volumeWidget,
-                    backBtn: goBackBtn,
-                    brightnessWidget: sliderBrightness,
-                    contrastWidget: sliderContrast,
-                    isOpened: state.videoPopup.opened === video.id
-                }));
-                const audioAnalizer = createAudioAnalizer(camVideo.el);
-                camVideo.setAudioAnalizer(audioAnalizer);
-            });
+        videos.forEach((video, index) => {
+            const camVideo = new CamVideo(Object.assign({}, video, {
+                bg: fullscreenVideoBG,
+                controlPanel: fullscreenVideoControls,
+                volumeWidget: volumeWidget,
+                backBtn: goBackBtn,
+                brightnessWidget: sliderBrightness,
+                contrastWidget: sliderContrast,
+            }));
+            const audioAnalizer = createAudioAnalizer(camVideo.el);
+            camVideo.setAudioAnalizer(audioAnalizer);
         });
+        //fetchPopup();
     });
 }
 function createAudioAnalizer(mediaEl) {

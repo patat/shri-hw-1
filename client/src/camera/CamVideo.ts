@@ -1,9 +1,10 @@
 /* global Hls requestAnimationFrame */
 import WidgetSlider from './WidgetSlider';
 import store from './store.js';
-import { openPopup, closePopup } from './actions.js';
+import { openPopup, closePopup, fetchPopup } from './actions.js';
 
 import {State, Action, Reducer, Reducers} from './store';
+import { CamState } from './actions';
 
 export interface CamVideoConfig {
   id: string;
@@ -14,7 +15,6 @@ export interface CamVideoConfig {
   backBtn: HTMLElement;
   brightnessWidget: WidgetSlider;
   contrastWidget: WidgetSlider;
-  isOpened: boolean;
 }
 
 export default class CamVideo {
@@ -64,15 +64,21 @@ export default class CamVideo {
     // video element is fully rendered
     this.el.addEventListener('loadeddata', () => {
       this._updateTransformAmounts();
-      
-      if (config.isOpened) {
-        this.activateVideo();
-      }
+      fetchPopup();
     });
 
     // init open / close events
     this.el.addEventListener('click', () => openPopup(this));
     this.backBtn.addEventListener('click', () => closePopup(this));
+    store.addTarget(this.el);
+    this.el.addEventListener('storeChange', (ev: CustomEventInit<State>) => {
+      const state = ev.detail.videoPopup as CamState;
+      if (state.opened === this.id) {
+        this.activateVideo();
+      } else {
+        this.deactivateVideo();
+      }
+    });
   }
 
   _initStream () {
@@ -125,15 +131,16 @@ export default class CamVideo {
 
   activateVideo () {
     // can't expand fullscreen video
+    console.log('activate');
     if (this.isFullscreen) return;
 
     this._expandToFullscreen();
 
     // unmute video
-    this.el.muted = false;
+    //this.el.muted = false;
     this.isFullscreen = true;
 
-    this._visualizeVolume();
+    //this._visualizeVolume();
     this._initSliders();
   }
 
@@ -143,13 +150,16 @@ export default class CamVideo {
     document.body.style.overflow = 'hidden';
     document.body.style.width = '100%';
 
+    console.log(this.container);
     this.container.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
+    console.log(this.container);
     this.container.style.zIndex = '2005';
     this.bg.style.zIndex = '2000';
     this.bg.style.opacity = '1';
 
     // give it time to expand, than show control panel
     setTimeout(() => {
+      console.log('expand');
       this.controlPanel.style.zIndex = '2010';
       this.controlPanel.style.opacity = '1';
     }, 500);

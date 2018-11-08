@@ -65,22 +65,22 @@ export default function () {
     const sliderContrastEl: HTMLElement = document.getElementById('slider-contrast');
     const sliderContrast: WidgetSlider = new WidgetSlider(sliderContrastEl);
 
-    fetchPopup().then((state: State) => {
-      videos.forEach((video, index) => {
-        const camVideo = new CamVideo(Object.assign({}, video, {
-          bg: fullscreenVideoBG,
-          controlPanel: fullscreenVideoControls,
-          volumeWidget: volumeWidget,
-          backBtn: goBackBtn,
-          brightnessWidget: sliderBrightness,
-          contrastWidget: sliderContrast,
-          isOpened: (state.videoPopup as CamState).opened === video.id
-        }));
 
-        const audioAnalizer = createAudioAnalizer(camVideo.el);
-        camVideo.setAudioAnalizer(audioAnalizer);
-      });
+    videos.forEach((video, index) => {
+      const camVideo = new CamVideo(Object.assign({}, video, {
+        bg: fullscreenVideoBG,
+        controlPanel: fullscreenVideoControls,
+        volumeWidget: volumeWidget,
+        backBtn: goBackBtn,
+        brightnessWidget: sliderBrightness,
+        contrastWidget: sliderContrast,
+      }));
+
+      const audioAnalizer = createAudioAnalizer(camVideo.el);
+      camVideo.setAudioAnalizer(audioAnalizer);
     });
+    
+    //fetchPopup();
   });
 }
 

@@ -1,4 +1,5 @@
-import { openPopup, closePopup } from './actions.js';
+import store from './store.js';
+import { openPopup, closePopup, fetchPopup } from './actions.js';
 export default class CamVideo {
     constructor(config) {
         this.id = config.id;
@@ -21,13 +22,21 @@ export default class CamVideo {
         // video element is fully rendered
         this.el.addEventListener('loadeddata', () => {
             this._updateTransformAmounts();
-            if (config.isOpened) {
-                this.activateVideo();
-            }
+            fetchPopup();
         });
         // init open / close events
         this.el.addEventListener('click', () => openPopup(this));
         this.backBtn.addEventListener('click', () => closePopup(this));
+        store.addTarget(this.el);
+        this.el.addEventListener('storeChange', (ev) => {
+            const state = ev.detail.videoPopup;
+            if (state.opened === this.id) {
+                this.activateVideo();
+            }
+            else {
+                this.deactivateVideo();
+            }
+        });
     }
     _initStream() {
         // @ts-ignore
@@ -75,13 +84,14 @@ export default class CamVideo {
     }
     activateVideo() {
         // can't expand fullscreen video
+        console.log('activate');
         if (this.isFullscreen)
             return;
         this._expandToFullscreen();
         // unmute video
-        this.el.muted = false;
+        //this.el.muted = false;
         this.isFullscreen = true;
-        this._visualizeVolume();
+        //this._visualizeVolume();
         this._initSliders();
     }
     _expandToFullscreen() {
@@ -89,12 +99,15 @@ export default class CamVideo {
         document.body.style.position = 'fixed';
         document.body.style.overflow = 'hidden';
         document.body.style.width = '100%';
+        console.log(this.container);
         this.container.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
+        console.log(this.container);
         this.container.style.zIndex = '2005';
         this.bg.style.zIndex = '2000';
         this.bg.style.opacity = '1';
         // give it time to expand, than show control panel
         setTimeout(() => {
+            console.log('expand');
             this.controlPanel.style.zIndex = '2010';
             this.controlPanel.style.opacity = '1';
         }, 500);

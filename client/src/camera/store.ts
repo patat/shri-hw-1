@@ -7,8 +7,15 @@ export type Reducer = (state: State, action: Action) => State;
 export type Reducers = {[key: string]: Reducer};
 
 
+declare  type CustomEventInit = {
+  store: State
+}
+
+
+
 let state: State = {}; 
 let combinedReducer: Reducer;
+let targets: HTMLElement[] = [];
 
 function create(reducers: Reducers) {
   combinedReducer = (state: State, action: Action) => {
@@ -37,11 +44,34 @@ function dispatch(action: Action): State {
     state = nextState;
   }
 
-  console.log(state);
+  emitStoreChange();
   return state;
+}
+
+function addTarget(target: HTMLElement) {
+  if (!targets.some((el) => el === target)) {
+    targets.push(target);
+  }
+}
+
+function removeTarget(target: HTMLElement) {
+  const index = targets.indexOf(target);
+  if (index !== -1) {
+    targets = targets.splice(index, 1);
+  }
+}
+
+function emitStoreChange() {
+  const stateClone: State = Object.assign({}, state);
+  const event = new CustomEvent('storeChange', { detail: stateClone });
+  targets.forEach(target => {
+    target.dispatchEvent(event);
+  });
 }
 
 export default {
   create,
-  dispatch
+  dispatch,
+  addTarget,
+  removeTarget
 };
