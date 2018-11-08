@@ -1,43 +1,38 @@
-export interface Action {
-  type: string,
-  payload?: any
+export interface IAction {
+  type: string;
+  payload?: any;
 }
-export type State = { [key: string]: {} };
-export type Reducer = (state: State, action: Action) => State;
-export type Reducers = {[key: string]: Reducer};
+export interface IState { [key: string]: {}; }
+export type Reducer = (state: IState, action: IAction) => IState;
+export interface IReducers { [key: string]: Reducer; }
 
-
-declare  type CustomEventInit = {
-  store: State
-}
-
-
-
-let state: State = {}; 
+let state: IState = {};
 let combinedReducer: Reducer;
 let targets: HTMLElement[] = [];
 
-function create(reducers: Reducers) {
-  combinedReducer = (state: State, action: Action) => {
+function create(reducers: IReducers) {
+  combinedReducer = (prevState: IState, action: IAction) => {
     let stateChanged = false;
-    const nextState: State = {};
+    const nextState: IState = {};
 
     for (const key in reducers) {
-      const reducer = reducers[key];
-      const prevStateVal = state[key];
-      const nextStateVal = reducer(prevStateVal, action);
-      nextState[key] = nextStateVal;
+      if (reducers.hasOwnProperty(key)) {
+        const reducer = reducers[key];
+        const prevStateVal = prevState[key];
+        const nextStateVal = reducer(prevStateVal, action);
+        nextState[key] = nextStateVal;
 
-      if (nextStateVal !== state[key]) {
-        stateChanged = true;
+        if (nextStateVal !== state[key]) {
+          stateChanged = true;
+        }
       }
     }
 
-    return stateChanged ? nextState : state;
+    return stateChanged ? nextState : prevState;
   };
 }
 
-function dispatch(action: Action): State {
+function dispatch(action: IAction): IState {
   const nextState = combinedReducer(state, action);
 
   if (state !== nextState) {
@@ -62,9 +57,9 @@ function removeTarget(target: HTMLElement) {
 }
 
 function emitStoreChange() {
-  const stateClone: State = Object.assign({}, state);
-  const event = new CustomEvent('storeChange', { detail: stateClone });
-  targets.forEach(target => {
+  const stateClone: IState = Object.assign({}, state);
+  const event = new CustomEvent("storeChange", { detail: stateClone });
+  targets.forEach((target) => {
     target.dispatchEvent(event);
   });
 }
@@ -73,5 +68,5 @@ export default {
   create,
   dispatch,
   addTarget,
-  removeTarget
+  removeTarget,
 };

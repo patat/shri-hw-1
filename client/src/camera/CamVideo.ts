@@ -1,12 +1,12 @@
 /* global Hls requestAnimationFrame */
-import WidgetSlider from './WidgetSlider';
-import store from './store.js';
-import { openPopup, closePopup, fetchPopup } from './actions.js';
+import { closePopup, fetchPopup, openPopup } from "./actions.js";
+import store from "./store.js";
+import WidgetSlider from "./WidgetSlider";
 
-import {State, Action, Reducer, Reducers} from './store';
-import { CamState } from './actions';
+import { ICamState } from "./actions";
+import { IAction, IState, Reducer, Reducers } from "./store";
 
-export interface CamVideoConfig {
+export interface ICamVideoConfig {
   id: string;
   url: string;
   bg: HTMLElement;
@@ -18,26 +18,26 @@ export interface CamVideoConfig {
 }
 
 export default class CamVideo {
-  id: string
-  url: string
-  el: HTMLVideoElement
-  container: HTMLElement
-  bg: HTMLElement
-  controlPanel: HTMLElement
-  volumeWidget: HTMLElement
-  backBtn: HTMLElement
-  brightness: number
-  brightnessWidget: WidgetSlider
-  contrast: number
-  contrastWidget: WidgetSlider
-  isFullscreen: boolean
-  scale: number;
-  translateX: number;
-  translateY: number;
-  frequencyData: Uint8Array;
-  audioAnalizer: any
+  public id: string;
+  public url: string;
+  public el: HTMLVideoElement;
+  public container: HTMLElement;
+  public bg: HTMLElement;
+  public controlPanel: HTMLElement;
+  public volumeWidget: HTMLElement;
+  public backBtn: HTMLElement;
+  public brightness: number;
+  public brightnessWidget: WidgetSlider;
+  public contrast: number;
+  public contrastWidget: WidgetSlider;
+  public isFullscreen: boolean;
+  public scale: number;
+  public translateX: number;
+  public translateY: number;
+  public frequencyData: Uint8Array;
+  public audioAnalizer: any;
 
-  constructor (config: CamVideoConfig) {
+  constructor(config: ICamVideoConfig) {
     this.id = config.id;
     this.url = config.url;
     this.el = document.querySelector(`#${this.id}`);
@@ -62,17 +62,17 @@ export default class CamVideo {
     this.el.muted = true;
 
     // video element is fully rendered
-    this.el.addEventListener('loadeddata', () => {
+    this.el.addEventListener("loadeddata", () => {
       this._updateTransformAmounts();
       fetchPopup();
     });
 
     // init open / close events
-    this.el.addEventListener('click', () => openPopup(this));
-    this.backBtn.addEventListener('click', () => closePopup(this));
+    this.el.addEventListener("click", () => openPopup(this));
+    this.backBtn.addEventListener("click", () => closePopup(this));
     store.addTarget(this.el);
-    this.el.addEventListener('storeChange', (ev: CustomEventInit<State>) => {
-      const state = ev.detail.videoPopup as CamState;
+    this.el.addEventListener("storeChange", (ev: CustomEventInit<IState>) => {
+      const state = ev.detail.videoPopup as ICamState;
       if (state.opened === this.id) {
         this.activateVideo();
       } else {
@@ -81,7 +81,7 @@ export default class CamVideo {
     });
   }
 
-  _initStream () {
+  public _initStream() {
     // @ts-ignore
     if (Hls.isSupported()) {
       // @ts-ignore
@@ -92,17 +92,17 @@ export default class CamVideo {
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
         this.el.play();
       });
-    } else if (this.el.canPlayType('application/vnd.apple.mpegurl')) {
-      this.el.setAttribute('src', this.url);
-      this.el.addEventListener('loadedmetadata', () => {
+    } else if (this.el.canPlayType("application/vnd.apple.mpegurl")) {
+      this.el.setAttribute("src", this.url);
+      this.el.addEventListener("loadedmetadata", () => {
         this.el.play();
       });
     }
   }
 
-  _updateTransformAmounts () {
+  public _updateTransformAmounts() {
     // transform amounts can be recalculated only in initial state
-    if (this.isFullscreen) return;
+    if (this.isFullscreen) { return; }
 
     const boundingRect = this.el.getBoundingClientRect();
     const elRatio = boundingRect.width / boundingRect.height;
@@ -115,7 +115,7 @@ export default class CamVideo {
     this.translateY = (window.innerHeight - boundingRect.height * this.scale) / 2 - boundingRect.top;
   }
 
-  _initSliders () {
+  public _initSliders() {
     this.brightnessWidget.setValue(this.brightness / 2);
     this.brightnessWidget.bindCallback((value: number) => {
       this.brightness = value * 2;
@@ -129,45 +129,45 @@ export default class CamVideo {
     });
   }
 
-  activateVideo () {
+  public activateVideo() {
     // can't expand fullscreen video
-    console.log('activate');
-    if (this.isFullscreen) return;
+    console.log("activate");
+    if (this.isFullscreen) { return; }
 
     this._expandToFullscreen();
 
     // unmute video
-    //this.el.muted = false;
+    // this.el.muted = false;
     this.isFullscreen = true;
 
-    //this._visualizeVolume();
+    // this._visualizeVolume();
     this._initSliders();
   }
 
-  _expandToFullscreen () {
+  public _expandToFullscreen() {
     // forbid page scroll
-    document.body.style.position = 'fixed';
-    document.body.style.overflow = 'hidden';
-    document.body.style.width = '100%';
+    document.body.style.position = "fixed";
+    document.body.style.overflow = "hidden";
+    document.body.style.width = "100%";
 
     console.log(this.container);
     this.container.style.transform = `translate(${this.translateX}px, ${this.translateY}px) scale(${this.scale})`;
     console.log(this.container);
-    this.container.style.zIndex = '2005';
-    this.bg.style.zIndex = '2000';
-    this.bg.style.opacity = '1';
+    this.container.style.zIndex = "2005";
+    this.bg.style.zIndex = "2000";
+    this.bg.style.opacity = "1";
 
     // give it time to expand, than show control panel
     setTimeout(() => {
-      console.log('expand');
-      this.controlPanel.style.zIndex = '2010';
-      this.controlPanel.style.opacity = '1';
+      console.log("expand");
+      this.controlPanel.style.zIndex = "2010";
+      this.controlPanel.style.opacity = "1";
     }, 500);
   }
 
-  deactivateVideo () {
+  public deactivateVideo() {
     // video must be in fullscreen mode
-    if (!this.isFullscreen) return;
+    if (!this.isFullscreen) { return; }
 
     this._shrinkBackToGrid();
     // mute video
@@ -175,29 +175,29 @@ export default class CamVideo {
     this.isFullscreen = false;
   }
 
-  _shrinkBackToGrid () {
+  public _shrinkBackToGrid() {
     // release page scroll
-    document.body.style.position = '';
-    document.body.style.overflow = '';
-    document.body.style.width = '';
+    document.body.style.position = "";
+    document.body.style.overflow = "";
+    document.body.style.width = "";
 
-    this.container.style.transform = 'scale(1)';
-    this.container.style.zIndex = '';
-    this.bg.style.zIndex = '-1';
-    this.bg.style.opacity = '0';
-    this.controlPanel.style.zIndex = '-1';
-    this.controlPanel.style.opacity = '0';
+    this.container.style.transform = "scale(1)";
+    this.container.style.zIndex = "";
+    this.bg.style.zIndex = "-1";
+    this.bg.style.opacity = "0";
+    this.controlPanel.style.zIndex = "-1";
+    this.controlPanel.style.opacity = "0";
   }
 
-  setAudioAnalizer (analizer: any) {
+  public setAudioAnalizer(analizer: any) {
     this.audioAnalizer = analizer;
     const bufferLength = this.audioAnalizer.frequencyBinCount;
     this.frequencyData = new Uint8Array(bufferLength);
   }
 
-  _visualizeVolume () {
-    if (!this.isFullscreen) return;
-    if (!this.audioAnalizer) return;
+  public _visualizeVolume() {
+    if (!this.isFullscreen) { return; }
+    if (!this.audioAnalizer) { return; }
     this.audioAnalizer.getByteFrequencyData(this.frequencyData);
     const peakFrequency = Math.max.apply(null, this.frequencyData);
     const volumeLevelPercent = Math.floor(100 * peakFrequency / 255);

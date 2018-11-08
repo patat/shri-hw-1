@@ -2,19 +2,21 @@ let state = {};
 let combinedReducer;
 let targets = [];
 function create(reducers) {
-    combinedReducer = (state, action) => {
+    combinedReducer = (prevState, action) => {
         let stateChanged = false;
         const nextState = {};
         for (const key in reducers) {
-            const reducer = reducers[key];
-            const prevStateVal = state[key];
-            const nextStateVal = reducer(prevStateVal, action);
-            nextState[key] = nextStateVal;
-            if (nextStateVal !== state[key]) {
-                stateChanged = true;
+            if (reducers.hasOwnProperty(key)) {
+                const reducer = reducers[key];
+                const prevStateVal = prevState[key];
+                const nextStateVal = reducer(prevStateVal, action);
+                nextState[key] = nextStateVal;
+                if (nextStateVal !== state[key]) {
+                    stateChanged = true;
+                }
             }
         }
-        return stateChanged ? nextState : state;
+        return stateChanged ? nextState : prevState;
     };
 }
 function dispatch(action) {
@@ -38,8 +40,8 @@ function removeTarget(target) {
 }
 function emitStoreChange() {
     const stateClone = Object.assign({}, state);
-    const event = new CustomEvent('storeChange', { detail: stateClone });
-    targets.forEach(target => {
+    const event = new CustomEvent("storeChange", { detail: stateClone });
+    targets.forEach((target) => {
         target.dispatchEvent(event);
     });
 }
@@ -47,5 +49,5 @@ export default {
     create,
     dispatch,
     addTarget,
-    removeTarget
+    removeTarget,
 };
