@@ -1,0 +1,13 @@
+.main-wrapper {
+  position: relative;
+  min-height: 100vh;
+  padding-top: 3.9375rem;
+  padding-bottom: 130px;
+}
+
+@media (min-width: 1366px) {
+  .main-wrapper {
+    padding-top: 5.875rem;
+    padding-bottom: 50px;
+  }
+}

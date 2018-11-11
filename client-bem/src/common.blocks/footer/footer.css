@@ -1,0 +1,54 @@
+/* ==========================================================================
+   # Main Footer & Footer menu
+   ========================================================================== */
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-size: 0.75rem;
+  color: #858585;
+  letter-spacing: 0.01px;
+  padding: 16px 20px;
+}
+
+  .footer__copyright {
+    padding-top: 8px;
+    word-spacing: 0.1rem;
+  }
+
+.footer-menu {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+  .footer-menu__item {
+    margin-bottom: 16px;
+    margin-right: 16px;
+  }
+
+
+  .footer-menu__link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+@media (min-width: 1366px) {
+  .footer {
+    position: absolute;
+    bottom: 25px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 2.5rem;
+    padding-right: 2.25rem;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+    .footer-menu__item {
+      margin-bottom: 0;
+    }
+}
