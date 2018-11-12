@@ -1,7 +1,7 @@
 /* ==========================================================================
    # Page Header styles
    ========================================================================== */
-.header {
+.Header {
   position: fixed;
   top: 0;
   left: 0;
@@ -16,19 +16,19 @@
   z-index: 100;
 }
 
-  .header__logo {
+  .Header-Logo {
     width: 110px;
     height: 37px;
   }
 
 @media (min-width: 1366px) {
-  .header {
+  .Header {
     justify-content: flex-start;
     height: 94px;
     padding-bottom: 2px;
     border-bottom: 1px solid #F0F0F0;
   }
-    .header__logo {
+    .Header-Logo {
       margin-left: 20px;
     }
 }

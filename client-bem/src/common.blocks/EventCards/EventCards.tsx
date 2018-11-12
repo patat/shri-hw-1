@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import eventsData from './events.json';
-import EventCard from '../event-card/EventCard';
+import { EventCard } from '../EventCard';
 import './EventCards.css';
+import { cn } from '@bem-react/classname';
 
 export interface HouseEvent {
   type: string;
@@ -18,17 +19,20 @@ export interface EventsData {
   events: HouseEvent[]
 }
 
+const cnEventCard = cn('EventCard');
+const cnEventCards = cn('EventCards');
+
 class EventCards extends Component {
   renderEventCards(data: EventsData) {
     return data.events.map(event => {
-      const mixClassName = `event-cards__item_size_${event.size}`;
-      return <EventCard {...event} mix={mixClassName} />
+      const mixClassName = cnEventCards('Item', { size: event.size }, [cnEventCard()]);
+      return <EventCard {...event} className={mixClassName} />
     });
   }
 
   render() {
     return (
-      <div className="event-cards">
+      <div className={cnEventCards()}>
         { this.renderEventCards(eventsData as EventsData) }
       </div>
     );

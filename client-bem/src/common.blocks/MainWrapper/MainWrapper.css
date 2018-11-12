@@ -1,4 +1,4 @@
-.main-wrapper {
+.MainWrapper {
   position: relative;
   min-height: 100vh;
   padding-top: 3.9375rem;
@@ -6,7 +6,7 @@
 }
 
 @media (min-width: 1366px) {
-  .main-wrapper {
+  .MainWrapper {
     padding-top: 5.875rem;
     padding-bottom: 50px;
   }

@@ -1,8 +1,8 @@
 /* ==========================================================================
-   # Module main-menu
+   # Module MainMenu
    ========================================================================== */
 
-.main-menu {
+.MainMenu {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -14,7 +14,7 @@
   transition: transform 0.5s ease-out;
 }
   
-  .main-menu__container {
+  .MainMenu-Container {
     z-index: 1000;
     opacity: 1;
     position: fixed;
@@ -26,13 +26,13 @@
     transition: opacity .5s ease-out;
   }
   
-  .main-menu__burger {
+  .MainMenu-Burger {
     padding: 1rem;
     overflow: hidden;
     margin-right: -1rem;
   }
 
-  .main-menu__burger-icon {
+  .MainMenu-BurgerIcon {
     width: 1rem;
     height: 14px;
     transition: transform .2s ease-out;
@@ -40,16 +40,16 @@
     touch-action: manipulation;
   }
 
-  .main-menu__item {
+  .MainMenu-Item {
     margin-bottom: 0.5rem;
   }
 
-  .main-menu__item--active .main-menu__link,
-  .main-menu__item:hover .main-menu__link {
+  .MainMenu-Item_active .MainMenu-Link,
+  .MainMenu-Item:hover .MainMenu-Link {
     opacity: 1;
   }
 
-  .main-menu__link {
+  .MainMenu-Link {
     position: relative;
     display: inline-block;
     top: 0.125rem;
@@ -64,50 +64,50 @@
     user-select: none;
   }
 
-.main-menu__container--hiding {
+.MainMenu-Container_hiding {
   opacity: 0;
 }
 
-.main-menu__container--hidden {
+.MainMenu-Container_hidden {
   display: none;
 }
 
-.main-menu--hidden {
+.MainMenu_hidden {
   transform: translateX(-101%);
 }
 
-.main-menu__burger-icon--active {
+.MainMenu-BurgerIcon_active {
   transform: scale(1.2, 1.4);
 }
 
 @media (min-width: 1366px) {
-  .main-menu {
+  .MainMenu {
     flex-direction: row;
     width: 100%;
     padding-left: 23px;
   }
-    .main-menu__container {
+    .MainMenu-Container {
       position: static;
       background: transparent;
     }
 
-    .main-menu__container--hidden {
+    .MainMenu-Container_hidden {
       z-index: 0;
       opacity: 1;
       display: block;
     }
 
-    .main-menu__container--hidden .main-menu {
+    .MainMenu-Container_hidden .MainMenu {
       transform: none;
       display: flex;
       align-items: center;
     }
 
-    .main-menu__burger {
+    .MainMenu-Burger {
       display: none;
     }
 
-    .main-menu__item {
+    .MainMenu-Item {
       margin-bottom: 0;
       margin-left: 27px;
     }

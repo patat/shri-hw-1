@@ -1,7 +1,7 @@
 /* ==========================================================================
    # Main Footer & Footer menu
    ========================================================================== */
-.footer {
+.Footer {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -12,29 +12,29 @@
   padding: 16px 20px;
 }
 
-  .footer__copyright {
+  .Footer-Copyright {
     padding-top: 8px;
     word-spacing: 0.1rem;
   }
 
-.footer-menu {
+.FooterMenu {
   display: flex;
   flex-wrap: wrap;
 }
 
-  .footer-menu__item {
+  .FooterMenu-Item {
     margin-bottom: 16px;
     margin-right: 16px;
   }
 
 
-  .footer-menu__link {
+  .FooterMenu-Link {
     text-decoration: none;
     color: inherit;
   }
 
 @media (min-width: 1366px) {
-  .footer {
+  .Footer {
     position: absolute;
     bottom: 25px;
     left: 0;
@@ -48,7 +48,7 @@
     padding-bottom: 0;
   }
 
-    .footer-menu__item {
+    .FooterMenu-Item {
       margin-bottom: 0;
     }
 }
