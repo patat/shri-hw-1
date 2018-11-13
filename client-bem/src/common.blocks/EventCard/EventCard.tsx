@@ -27,16 +27,16 @@ class EventCard extends Component<IEventCardProps> {
         </div>
         <div className={cnEventCard('Rest')}>
           {this.props.description &&
-            <p className={cnEventCard('Item') + cnEventCard('Description')}>{this.props.description}</p>
+            <p className={`${cnEventCard('Item')} ${cnEventCard('Description')}`}>{this.props.description}</p>
           }
           
           {this.props.data && this.props.data.type === "graph" &&
-            <img src={richdata} className={cnEventCard('Item') + cnEventCard('Graph')} />
+            <img src={richdata} className={`${cnEventCard('Item')} ${cnEventCard('Graph')}`} />
           }
           
           {this.props.data && this.props.data.temperature &&
             this.props.data.humidity &&
-            <div className={cnEventCard('Item') + cnEventCard('Climate')}>
+            <div className={`${cnEventCard('Item')} ${cnEventCard('Climate')}`}>
               <div className={cnEventCard('Temperature')}>Температура: <span className={cnEventCard('ClimateValue')}>{this.props.data.temperature} С</span></div>
               <div className={cnEventCard('Humidity')}>Влажность: <span className={cnEventCard('ClimateValue')}>{this.props.data.humidity}%</span></div>
             </div>            
@@ -47,7 +47,7 @@ class EventCard extends Component<IEventCardProps> {
            this.props.data.artist &&
            this.props.data.track &&
            this.props.data.volume &&
-             <div className={cnEventCard('Item') + cnEventCard('Music', ['music'])}>
+             <div className={`${cnEventCard('Item')} ${cnEventCard('Music', ['music'])}`}>
               <div className="music__albumcover"></div>
               <div className="music__title">
                 {this.props.data.artist} — {this.props.data.track.name}
@@ -62,7 +62,7 @@ class EventCard extends Component<IEventCardProps> {
           }
  
           {this.props.data && this.props.data.buttons &&
-            <div className={cnEventCard('Item') + cnEventCard('Buttons')}>
+            <div className={`${cnEventCard('Item')} ${cnEventCard('Buttons')}`}>
               <div className={cnEventCard('Button', {accept: true})}>
                 {this.props.data.buttons[0]}
               </div>
@@ -73,7 +73,7 @@ class EventCard extends Component<IEventCardProps> {
           }
 
           {this.props.data && this.props.data.image &&
-            <div className={cnEventCard('Item') + cnEventCard('Camera')}>
+            <div className={`${cnEventCard('Item')} ${cnEventCard('Camera')}`}>
               <div className={cnEventCard('View')}>
                 <div className={cnEventCard('Scrollbar')}>
                   <div className={cnEventCard('Scroller')}></div>

@@ -2,6 +2,9 @@
    # Main Footer & Footer menu
    ========================================================================== */
 .Footer {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333333;
   position: absolute;
   bottom: 0;
   left: 0;
