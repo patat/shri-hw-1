@@ -3,6 +3,8 @@
    ========================================================================== */
 .EventCard {
   box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333333;
   position: relative;
   background-color: #FAFAFA;
   border-radius: 20px;
@@ -129,6 +131,10 @@
   }
 
   .EventCard-Title {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333333;
+    margin: 0;
     font-size: 14px;
     line-height: calc(17 / 14);
   }
@@ -149,6 +155,7 @@
     font-size: 18px;
     line-height: calc(22 / 18);
     padding-top: 16px;
+    margin: 0;
   }
 
   .EventCard-Graph {
@@ -182,6 +189,7 @@
   }
 
   .EventCard-Button {
+    box-sizing: border-box;
     font-size: 20px;
     line-height: calc(22 / 20);
     padding: 11px 20px;
