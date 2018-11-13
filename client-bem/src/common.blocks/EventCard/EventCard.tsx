@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './EventCard.css';
-import './music.css';
 import richdata from './richdata.svg';
 import { cn } from '@bem-react/classname';
 import { IEventCardProps } from './index';
+import Music from '../Music/Music';
 
 const cnEventCard = cn('EventCard');
 
 class EventCard extends Component<IEventCardProps> {
   render() {
+    const musicClassnameMix = `${cnEventCard('Item')} ${cnEventCard('Music')}`;
     return (
       <div className={this.props.className}>
         <div className={cnEventCard('Options')}>
@@ -47,18 +48,7 @@ class EventCard extends Component<IEventCardProps> {
            this.props.data.artist &&
            this.props.data.track &&
            this.props.data.volume &&
-             <div className={`${cnEventCard('Item')} ${cnEventCard('Music', ['music'])}`}>
-              <div className="music__albumcover"></div>
-              <div className="music__title">
-                {this.props.data.artist} — {this.props.data.track.name}
-              </div>
-              <div className="music__progress"></div>
-              <div className="music__length">{this.props.data.track.length}</div>
-              <div className="music__prev-track"></div>
-              <div className="music__next-track"></div>
-              <div className="music__volume-slider"></div>
-              <div className="music__volume-value">{this.props.data.volume}</div>
-            </div>
+             <Music {...this.props.data} className={musicClassnameMix} />
           }
  
           {this.props.data && this.props.data.buttons &&
