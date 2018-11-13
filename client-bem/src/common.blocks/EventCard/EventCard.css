@@ -131,9 +131,6 @@
   }
 
   .EventCard-Title {
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #333333;
     margin: 0;
     font-size: 14px;
     line-height: calc(17 / 14);
@@ -246,28 +243,6 @@
   .EventCard-Brightness {
     font-size: 12px;
     line-height: calc(14 / 12);
-  }
-
-.EventCard_type_critical {
-  background-color: #DB5341;
-  border-radius: 20px 20px 30px 30px;
-}
-
-  .EventCard_type_critical .EventCard-Top {
-    color: #ffffff;
-    padding-bottom: 16px;
-  }
-
-  .EventCard_type_critical .EventCard-Rest {
-    background-color: #FAFAFA;
-  }
-
-  .EventCard.EventCard_type_critical:hover {
-    background-color: #DB5341;
-  }
-
-  .EventCard.EventCard_type_critical:hover .EventCard-Rest {
-    background-color: #F3F3F3;
   }
 
 @media (min-width: 480px) {
