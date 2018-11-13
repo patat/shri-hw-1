@@ -4,10 +4,32 @@ import richdata from './richdata.svg';
 import { cn } from '@bem-react/classname';
 import { IEventCardProps } from './index';
 import Music from '../Music/Music';
+import { Button } from '../Button';
+
 
 const cnEventCard = cn('EventCard');
 
 class EventCard extends Component<IEventCardProps> {
+  renderButtons(buttons: string[]) {
+    if (!buttons) return;
+
+    return (
+      <div className={`${cnEventCard('Item')} ${cnEventCard('Buttons')}`}>
+        {buttons.map(text => {
+          const buttonType = text === 'Да' ? 'accept' : 'reject';
+          return (
+            <Button className={cnEventCard('Button')}
+                  text={text}
+                  theme={'islands'}
+                  type={buttonType}
+                  clickHandler={() => alert(buttonType)}
+            />
+          );
+        })}
+      </div>
+    );
+  }
+
   render() {
     const musicClassnameMix = `${cnEventCard('Item')} ${cnEventCard('Music')}`;
     return (
@@ -52,14 +74,7 @@ class EventCard extends Component<IEventCardProps> {
           }
  
           {this.props.data && this.props.data.buttons &&
-            <div className={`${cnEventCard('Item')} ${cnEventCard('Buttons')}`}>
-              <div className={cnEventCard('Button', {accept: true})}>
-                {this.props.data.buttons[0]}
-              </div>
-              <div className={cnEventCard('Button', {accept: false})}>
-                {this.props.data.buttons[1]}
-              </div>
-            </div>            
+             this.renderButtons(this.props.data.buttons)
           }
 
           {this.props.data && this.props.data.image &&

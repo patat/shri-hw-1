@@ -185,21 +185,6 @@
     justify-content: space-between;
   }
 
-  .EventCard-Button {
-    box-sizing: border-box;
-    font-size: 20px;
-    line-height: calc(22 / 20);
-    padding: 11px 20px;
-    min-width: 132px;
-    text-align: center;
-    border-radius: 8px;
-    background-color: #E5E5E5;
-  }
-
-  .EventCard-Button_accept {
-    background-color: #FFD93E;
-  }
-
   .EventCard-Camera {
     margin-top: 20px;
   }
@@ -321,7 +306,6 @@
     }
 
     .EventCard-Button {
-      padding: 16px 20px;
       margin-right: 18px;
     }
 

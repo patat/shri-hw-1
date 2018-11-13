@@ -3,6 +3,7 @@ import eventsData from './events.json';
 import { EventCard } from '../EventCard';
 import './EventCards.css';
 import { cn } from '@bem-react/classname';
+import { IMusicProps } from '../Music/Music';
 
 export interface HouseEvent {
   type: string;
@@ -12,7 +13,14 @@ export interface HouseEvent {
   icon: string;
   size: string;
   description?: string;
-  data?: any
+  data?: IMusicProps | {
+    temperature: number,
+    humidity: number
+  } | {
+    image: string
+  } | {
+    buttons: string[]
+  } | any
 }
 
 export interface EventsData {
