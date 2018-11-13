@@ -1,0 +1,114 @@
+/* ==========================================================================
+   # Module MainMenu
+   ========================================================================== */
+
+.MainMenu {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding-left: 20px;
+  padding-right: 20px;
+  overflow: hidden;
+  background: #fff;
+  min-height: 100%;
+  transition: transform 0.5s ease-out;
+}
+  
+  .MainMenu-Container {
+    z-index: 1000;
+    opacity: 1;
+    position: fixed;
+    top: 3.9375rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    transition: opacity .5s ease-out;
+  }
+  
+  .MainMenu-Burger {
+    padding: 1rem;
+    overflow: hidden;
+    margin-right: -1rem;
+  }
+
+  .MainMenu-BurgerIcon {
+    width: 1rem;
+    height: 14px;
+    transition: transform .2s ease-out;
+    user-select: none;
+    touch-action: manipulation;
+  }
+
+  .MainMenu-Item {
+    margin-bottom: 0.5rem;
+  }
+
+  .MainMenu-Item_active .MainMenu-Link,
+  .MainMenu-Item:hover .MainMenu-Link {
+    opacity: 1;
+  }
+
+  .MainMenu-Link {
+    position: relative;
+    display: inline-block;
+    top: 0.125rem;
+    color: #333333;
+    text-decoration: none;
+    font-size: 1rem;
+    line-height: 1.25;
+    font-weight: bold;
+    opacity: 0.6;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    user-select: none;
+  }
+
+.MainMenu-Container_hiding {
+  opacity: 0;
+}
+
+.MainMenu-Container_hidden {
+  display: none;
+}
+
+.MainMenu_hidden {
+  transform: translateX(-101%);
+}
+
+.MainMenu-BurgerIcon_active {
+  transform: scale(1.2, 1.4);
+}
+
+@media (min-width: 1366px) {
+  .MainMenu {
+    flex-direction: row;
+    width: 100%;
+    padding-left: 23px;
+  }
+    .MainMenu-Container {
+      position: static;
+      background: transparent;
+    }
+
+    .MainMenu-Container_hidden {
+      z-index: 0;
+      opacity: 1;
+      display: block;
+    }
+
+    .MainMenu-Container_hidden .MainMenu {
+      transform: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .MainMenu-Burger {
+      display: none;
+    }
+
+    .MainMenu-Item {
+      margin-bottom: 0;
+      margin-left: 27px;
+    }
+}

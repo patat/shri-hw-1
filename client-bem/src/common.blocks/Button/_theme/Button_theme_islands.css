@@ -1,0 +1,9 @@
+.Button_theme_islands {
+  color: #333333;
+  font-size: 20px;
+  line-height: calc(22 / 20);
+  padding: 16px 20px;
+  min-width: 132px;
+  border-radius: 8px;
+  background-color: #E5E5E5;
+}

@@ -1,0 +1,65 @@
+.EventCard_type_critical {
+  background-color: #DB5341;
+  border-radius: 20px 20px 30px 30px;
+}
+
+  .EventCard_type_critical .EventCard-Top {
+    color: #ffffff;
+    padding-bottom: 16px;
+  }
+
+  .EventCard_type_critical .EventCard-Rest {
+    background-color: #FAFAFA;
+  }
+
+  .EventCard.EventCard_type_critical:hover {
+    background-color: #DB5341;
+  }
+
+  .EventCard.EventCard_type_critical:hover .EventCard-Rest {
+    background-color: #F3F3F3;
+  }
+
+  .EventCard.EventCard_type_critical .EventCard-Icon_type_kettle {
+    background-image: url('kettle-white.svg');
+  }
+
+  .EventCard.EventCard_type_critical .EventCard-Icon_type_ac {
+    background-image: url('ac-white.svg');
+  }
+
+  .EventCard.EventCard_type_critical .EventCard-Icon_type_stats {
+    background-image: url('stats-white.svg');
+  }
+
+  .EventCard.EventCard_type_critical .EventCard-Icon_type_key {
+    background-image: url('key-white.svg');
+  }
+
+  .EventCard.EventCard_type_critical .EventCard-Icon_type_fridge {
+    background-image: url('fridge-white.svg');
+  }
+
+  .EventCard.EventCard_type_critical .EventCard-Icon_type_cleaner {
+    background-image: url('robot-cleaner-white.svg');
+  }
+
+  .EventCard.EventCard_type_critical .EventCard-Icon_type_router {
+    background-image: url('router-white.svg');
+  }
+
+  .EventCard.EventCard_type_critical .EventCard-Icon_type_music {
+    background-image: url('music-white.svg');
+  }
+
+  .EventCard.EventCard_type_critical .EventCard-Icon_type_thermal {
+    background-image: url('thermal-white.svg');
+  }
+
+  .EventCard.EventCard_type_critical .EventCard-Icon_type_cam {
+    background-image: url('cam-white.svg');
+  }
+
+  .EventCard.EventCard_type_critical .EventCard-Icon_type_battery {
+    background-image: url('battery-white.svg');
+  }
