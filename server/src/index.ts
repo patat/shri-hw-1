@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import path from 'path';
 
 import * as utils from './utils';
 const config = require('../config.json');
@@ -19,6 +20,10 @@ interface HouseEvent {
   description?: string;
   data?: any
 }
+
+app.use('/', express.static(path.join(__dirname, '../../client'), {
+  etag: false
+}));
 
 app.get('/status', (req: express.Request, res: express.Response) => {
   res.status(200);
@@ -69,6 +74,21 @@ app.post('/api/events', jsonParser, (req: express.Request, res: express.Response
   res.status(200);
   res.setHeader('Content-Type', 'application/json');
   res.send(JSON.stringify({ events }));
+});
+
+app.post('/api/cam-state', jsonParser, (req, res) => {
+  app.set('camState', req.body);
+});
+
+app.get('/api/cam-state', (req, res) => {
+  res.status(200);
+  res.setHeader('Content-Type', 'application/json');
+
+  let camState = app.get('camState');
+  if (!camState) {
+    camState = { opened: '' }
+  }
+  res.send(JSON.stringify(camState));
 });
 
 app.all('*', (req, res) => {

@@ -12,12 +12,16 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const path_1 = __importDefault(require("path"));
 const utils = __importStar(require("./utils"));
 const config = require('../config.json');
 const eventsDB = require('../events.json');
 const port = config.port || 8000;
 const app = express_1.default();
 const jsonParser = body_parser_1.default.json();
+app.use('/', express_1.default.static(path_1.default.join(__dirname, '../../client'), {
+    etag: false
+}));
 app.get('/status', (req, res) => {
     res.status(200);
     res.setHeader('Content-Type', 'text/html');
@@ -59,6 +63,18 @@ app.post('/api/events', jsonParser, (req, res) => {
     res.status(200);
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({ events }));
+});
+app.post('/api/cam-state', jsonParser, (req, res) => {
+    app.set('camState', req.body);
+});
+app.get('/api/cam-state', (req, res) => {
+    res.status(200);
+    res.setHeader('Content-Type', 'application/json');
+    let camState = app.get('camState');
+    if (!camState) {
+        camState = { opened: '' };
+    }
+    res.send(JSON.stringify(camState));
 });
 app.all('*', (req, res) => {
     res.status(404);
